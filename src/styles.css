@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg:#0b1020;
+}
+
+body{@apply bg-neutral-950 text-white;}
