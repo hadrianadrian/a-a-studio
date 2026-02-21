@@ -6,4 +6,7 @@
   --bg:#0b1020;
 }
 
-body{@apply bg-neutral-950 text-white;}
+body{
+  @apply bg-neutral-950 text-white;
+  font-family: 'Outfit', system-ui, sans-serif;
+}
