@@ -7,7 +7,7 @@ import {
   MapPin,
   Sparkles,
   Layers,
-  Cuboid,
+  Box,
   Orbit,
   Building2,
   PlayCircle,
@@ -73,7 +73,7 @@ const SERVICES = [
     accent: "from-emerald-500/20 via-sky-500/15 to-lime-400/15",
   },
   {
-    icon: Cuboid,
+    icon: Box,
     title: "Visualizations",
     items: ["Visualizations", "Animations", "Product Visualizations", "360° VR"],
     accent: "from-cyan-400/25 via-blue-500/15 to-fuchsia-500/20",
