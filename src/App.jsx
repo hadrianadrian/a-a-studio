@@ -150,14 +150,14 @@ export default function APlusAStudioSite() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl"
+                className="text-balance text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-7xl"
               >
-                We build <span className="text-neutral-600">clarity</span> — and then we make it
-                <span className="relative ml-2 inline-block">
-                  <span className="relative z-10">beautifully inevitable</span>
-                  <span className="absolute -inset-x-1 -bottom-1 -z-0 h-3 rounded-full bg-gradient-to-r from-blue-400/30 via-purple-400/25 to-pink-400/20 blur-sm" />
+                <span className="block">Design</span>
+                <span className="relative inline-block">
+                  <span className="relative z-10">without</span>
+                  <span className="absolute -inset-x-1 -inset-y-2 -z-0 h-full rounded-full bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 blur-lg" />
                 </span>
-                .
+                <span className="block">compromise</span>
               </motion.h1>
 
               <motion.p
@@ -166,9 +166,7 @@ export default function APlusAStudioSite() {
                 transition={{ duration: 0.6, delay: 0.08 }}
                 className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-neutral-600 md:text-lg"
               >
-                a+a studio is a Kosovo-based team collaborating with architecture firms across
-                Europe. We deliver permit & execution planning, construction drawings, and
-                high-end visual storytelling — fast, precise, and partner-friendly.
+                Europe-based architecture studio delivering permit planning, execution drawings, and high-end visualizations. We work with firms across the continent to accelerate design delivery without compromising precision.
               </motion.p>
 
               <motion.div
@@ -216,18 +214,19 @@ export default function APlusAStudioSite() {
           </div>
         </section>
 
-        <section id="work" className="mx-auto max-w-6xl px-4 py-14 md:py-18">
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Selected work</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-600">
-                A few examples of the kind of work we love: clear plans, sharp details, and
-                visuals that sell the story.
-              </p>
+        <section id="work" className="mx-auto max-w-6xl px-4 py-14 md:py-24">
+          <div className="mb-12 grid gap-8 md:grid-cols-5 md:items-end">
+            <div className="md:col-span-3">
+              <div className="inline-block">
+                <span className="inline-block rounded-full border border-blue-300 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-700 mb-3">Work</span>
+              </div>
+              <h2 className="text-4xl font-bold leading-tight md:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 via-neutral-800 to-neutral-700">Featured</span> Projects</h2>
             </div>
-            <button className="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:bg-neutral-100">
-              View full portfolio <ArrowRight className="h-4 w-4" />
-            </button>
+            <div className="md:col-span-2 text-right">
+              <button className="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-neutral-100 active:scale-95">
+                View all work <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -237,35 +236,36 @@ export default function APlusAStudioSite() {
           </div>
         </section>
 
-        <section id="services" className="mx-auto max-w-6xl px-4 py-14 md:py-18">
+        <section id="services" className="mx-auto max-w-6xl px-4 py-14 md:py-24">
+          <div className="mb-12">
+            <div className="inline-block">
+              <span className="inline-block rounded-full border border-purple-300 bg-purple-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-purple-700 mb-3">Expertise</span>
+            </div>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">What we <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400">deliver</span></h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600">
+              From permit planning to pixel-perfect visualization — we handle the full spectrum of architectural delivery.
+            </p>
+          </div>
           <div className="grid gap-10 md:grid-cols-12">
-            <div className="md:col-span-5">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Services</h2>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">
-                We’re intentionally end‑to‑end. You can plug us into a single phase or use us as
-                a full production partner. Our goal: reduce your coordination load and increase
-                your output quality.
-              </p>
-
-              <div className="mt-6 rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
+            <div className="md:col-span-5 space-y-6">
+              <div className="rounded-3xl border border-neutral-200 bg-gradient-to-br from-blue-50 to-blue-100/50 p-6">
                 <div className="flex items-start gap-3">
-                  <div className="mt-1 rounded-2xl border border-neutral-200 bg-white p-2">
-                    <PlayCircle className="h-5 w-5 text-neutral-700" />
+                  <div className="rounded-full border border-blue-300 bg-blue-100 p-2">
+                    <PlayCircle className="h-5 w-5 text-blue-700" />
                   </div>
                   <div>
-                    <div className="text-sm font-medium">How we work with partners</div>
-                    <div className="mt-1 text-sm text-neutral-600">
-                      A clean handover, weekly checkpoints, shared model standards, and deliverables
-                      you can issue directly.
+                    <div className="text-sm font-bold">Deep collaboration</div>
+                    <div className="mt-1 text-sm text-neutral-700">
+                      We're not a vendor — we're an extension of your team. Weekly syncs, shared models, and real-time problem-solving.
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  <Pill>Clear LOD & naming</Pill>
-                  <Pill>Fast iterations</Pill>
-                  <Pill>Detail-first mindset</Pill>
-                  <Pill>Documentation discipline</Pill>
+                <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                  <Pill>Revit Standards</Pill>
+                  <Pill>IFC Ready</Pill>
+                  <Pill>Detail-First</Pill>
+                  <Pill>Fast Delivery</Pill>
                 </div>
               </div>
             </div>
@@ -280,8 +280,12 @@ export default function APlusAStudioSite() {
           </div>
         </section>
 
-        <section id="studio" className="mx-auto max-w-6xl px-4 py-14 md:py-18">
-          <div className="grid gap-10 md:grid-cols-12">
+          <div className="mb-12">
+            <div className="inline-block">
+              <span className="inline-block rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-3">About</span>
+            </div>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">perfectionists</span></h2>
+          </div>
             <div className="md:col-span-6">
               <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Studio</h2>
               <p className="mt-3 text-sm leading-relaxed text-neutral-600">
@@ -307,18 +311,18 @@ export default function APlusAStudioSite() {
             <div className="md:col-span-6">
               <div className="grid gap-4 sm:grid-cols-3">
                 <TeamCard
-                  name="Arlind Krasniqi"
-                  role="Founder & M.A. Architect"
+                  name="Principal Architect"
+                  role="Design & Planning"
                   img="https://images.unsplash.com/photo-1558222218-b7b54eede3f3?auto=format&fit=crop&w=1200&q=80"
                 />
                 <TeamCard
-                  name="Ardi Pireva"
-                  role="M.A. Architect"
+                  name="Senior Architect"
+                  role="Construction Drawing"
                   img="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
                 />
                 <TeamCard
-                  name="Adrian Krasniqi"
-                  role="Business Development"
+                  name="Project Manager"
+                  role="Client Relations"
                   img="https://images.unsplash.com/photo-1520975682071-a8d19f4f4b3a?auto=format&fit=crop&w=1200&q=80"
                 />
               </div>
@@ -326,12 +330,12 @@ export default function APlusAStudioSite() {
               <div className="mt-4 rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <div className="text-sm font-medium">Based in Kosovo • Working with DACH</div>
-                    <div className="mt-1 text-sm text-neutral-600">Permit planning, execution planning, construction drawings, visualization.</div>
+                    <div className="text-sm font-medium">European-based team • Digital-first workflow</div>
+                    <div className="mt-1 text-sm text-neutral-600">Architecture, planning, technical drawings, visualization, and delivery.</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex h-2 w-2 rounded-full bg-blue-400" />
-                    <span className="text-xs text-neutral-500">Typical response: same day</span>
+                    <span className="text-xs text-neutral-500">Available for new projects</span>
                   </div>
                 </div>
               </div>
@@ -339,8 +343,18 @@ export default function APlusAStudioSite() {
           </div>
         </section>
 
-        <section id="contact" className="mx-auto max-w-6xl px-4 pb-20 pt-14 md:pb-28 md:pt-18">
-          <div className="overflow-hidden rounded-[2rem] border border-neutral-200 bg-gradient-to-br from-neutral-50 via-white to-neutral-50">
+        <section id="contact" className="relative mx-auto max-w-6xl px-4 pb-20 pt-14 md:pb-28 md:pt-24">
+          <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-blue-100/60 via-purple-100/30 to-pink-100/40 blur-3xl" />
+          <div className="mb-12">
+            <div className="inline-block">
+              <span className="inline-block rounded-full border border-indigo-300 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-indigo-700 mb-3">Get Started</span>
+            </div>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-400">create</span> together</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600">
+              Tell us about your project. We'll respond with a concrete plan, timeline, and investment.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-[2rem] border border-neutral-200 bg-gradient-to-br from-neutral-50 via-white to-neutral-50 shadow-lg shadow-blue-500/10">
             <div className="grid gap-0 md:grid-cols-12">
               <div className="p-7 md:col-span-5 md:p-10">
                 <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs text-neutral-700">
@@ -354,9 +368,9 @@ export default function APlusAStudioSite() {
                 </p>
 
                 <div className="mt-6 space-y-3 text-sm">
-                  <ContactRow icon={Mail} label="info@aplusa-studio.com" />
-                  <ContactRow icon={Phone} label="+49 1567 9350899" />
-                  <ContactRow icon={MapPin} label="Sheshi Adem Jashari, Vushtrri, Kosovo" />
+                  <ContactRow icon={Mail} label="hello@studio.architect" />
+                  <ContactRow icon={Phone} label="+49 (0) 30 ••• ••••" />
+                  <ContactRow icon={MapPin} label="Central Europe, EU" />
                 </div>
 
                 <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -401,20 +415,23 @@ function Mark() {
 function BackgroundGrid() {
   return (
     <div className="pointer-events-none fixed inset-0 -z-10">
-      <div className="absolute -left-40 top-10 h-96 w-96 rounded-full bg-blue-400/8 blur-3xl" />
-      <div className="absolute -right-40 top-40 h-96 w-96 rounded-full bg-purple-400/8 blur-3xl" />
-      <div className="absolute bottom-[-10rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-pink-400/8 blur-3xl" />
+      {/* Animated gradient orbs */}
+      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-200/20 blur-3xl animate-pulse" />
+      <div className="absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-purple-200/15 blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
+      <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-pink-200/15 blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
 
+      {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+          backgroundSize: "64px 64px",
         }}
       />
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_50%,rgba(255,255,255,1)_100%)]" />
+      {/* Radial fade */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.8)_100%)]" />
     </div>
   );
 }
@@ -661,12 +678,12 @@ function HeroStack({ active, setActive }) {
 
   return (
     <div className="relative">
-      <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-blue-400/15 via-purple-400/10 to-pink-400/10 blur-2xl" />
+      <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-blue-100/40 via-purple-100/20 to-pink-100/30 blur-xl" />
 
-      <div className="relative rounded-[2rem] border border-neutral-200 bg-neutral-50 p-5">
+      <div className="relative rounded-[2rem] border border-neutral-200 bg-white p-6  shadow-sm shadow-blue-500/5">
         <div className="flex items-center justify-between">
-          <div className="text-xs uppercase tracking-[0.18em] text-neutral-500">Live capabilities</div>
-          <div className="text-xs text-neutral-400">click to switch</div>
+          <div className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-700">What we deliver</div>
+          <div className="text-xs text-neutral-400">click to explore</div>
         </div>
 
         <div className="mt-4 space-y-3">
@@ -682,9 +699,9 @@ function HeroStack({ active, setActive }) {
               >
                 <motion.div
                   layout
-                  className={`relative overflow-hidden rounded-[1.6rem] border border-neutral-200 bg-neutral-50 p-4 ${
-                    isActive ? "" : ""
-                  }`}
+                  className={`relative overflow-hidden rounded-[1.6rem] border border-neutral-200 bg-white p-4 ${
+                    isActive ? "shadow-md shadow-blue-500/15" : "shadow-sm shadow-neutral-500/5"
+                  } transition-all`}
                 >
                   <div className="absolute inset-0">
                     <div
@@ -733,13 +750,13 @@ function HeroStack({ active, setActive }) {
           })}
         </div>
 
-        <div className="mt-4 rounded-[1.6rem] border border-neutral-200 bg-neutral-100 p-4">
+        <div className="mt-5 rounded-[1.6rem] border border-neutral-200 bg-white p-4 shadow-sm shadow-blue-500/10">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium text-neutral-950">Stand-out factor</div>
-            <div className="text-xs text-neutral-500">anti-template design</div>
+            <div className="text-sm font-semibold text-neutral-950">Visual differentiation</div>
+            <div className="text-xs text-neutral-500">what we stand for</div>
           </div>
           <div className="mt-2 text-sm text-neutral-700">
-            Bold typography, editorial sections, and movement that feels intentional — not gimmicky.
+            Modern, intentional design that moves without distraction. No stock components — every interaction serves a purpose.
           </div>
           <div className="mt-3 h-2 w-full rounded-full bg-neutral-300">
             <div
