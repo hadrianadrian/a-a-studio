@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -11,7 +11,9 @@ import {
   Orbit,
   Building2,
   PlayCircle,
+  Globe,
 } from "lucide-react";
+import { translations } from "./translations";
 
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
@@ -82,15 +84,34 @@ const SERVICES = [
 
 export default function APlusAStudioSite() {
   const [active, setActive] = useState(0);
+  const [lang, setLang] = useState("en");
+
+  useEffect(() => {
+    const urlLang = window.location.pathname.split("/")[1];
+    if (urlLang === "de" || urlLang === "en") {
+      setLang(urlLang);
+    }
+  }, []);
+
+  const t = translations[lang];
+
+  const handleLanguageChange = (newLang) => {
+    setLang(newLang);
+    if (newLang === "en") {
+      window.history.pushState({}, "", "/");
+    } else {
+      window.history.pushState({}, "", `/${newLang}`);
+    }
+  };
 
   const nav = useMemo(
     () => [
-      { key: "work", label: "Work" },
-      { key: "services", label: "Services" },
-      { key: "studio", label: "Studio" },
-      { key: "contact", label: "Contact" },
+      { key: "work", label: t.nav.work },
+      { key: "services", label: t.nav.services },
+      { key: "studio", label: t.nav.studio },
+      { key: "contact", label: t.nav.contact },
     ],
-    []
+    [t]
   );
 
   const scrollTo = (id) => {
@@ -128,6 +149,14 @@ export default function APlusAStudioSite() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleLanguageChange(lang === "en" ? "de" : "en")}
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
+              title={lang === "en" ? "Switch to Deutsch" : "Switch to English"}
+            >
+              <Globe className="h-3.5 w-3.5" />
+              {lang === "en" ? "DE" : "EN"}
+            </button>
             <a
               href="#contact"
               onClick={(e) => {
@@ -136,7 +165,7 @@ export default function APlusAStudioSite() {
               }}
               className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
             >
-              Start a project <ArrowRight className="h-4 w-4" />
+              {t.header.startProject} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -152,12 +181,12 @@ export default function APlusAStudioSite() {
                 transition={{ duration: 0.6 }}
                 className="text-balance text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-7xl"
               >
-                <span className="block">Design</span>
+                <span className="block">{t.hero.line1}</span>
                 <span className="relative inline-block">
-                  <span className="relative z-10">without</span>
+                  <span className="relative z-10">{t.hero.line2}</span>
                   <span className="absolute -inset-x-1 -inset-y-2 -z-0 h-full rounded-full bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 blur-lg" />
                 </span>
-                <span className="block">compromise</span>
+                <span className="block">{t.hero.line3}</span>
               </motion.h1>
 
               <motion.p
@@ -166,7 +195,7 @@ export default function APlusAStudioSite() {
                 transition={{ duration: 0.6, delay: 0.08 }}
                 className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-neutral-600 md:text-lg"
               >
-                Europe-based architecture studio delivering permit planning, execution drawings, and high-end visualizations. We work with firms across the continent to accelerate design delivery without compromising precision.
+                {t.hero.desc}
               </motion.p>
 
               <motion.div
@@ -183,7 +212,7 @@ export default function APlusAStudioSite() {
                   }}
                   className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
                 >
-                  See selected work <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                  {t.hero.seeWork} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                 </a>
                 <a
                   href="#services"
@@ -193,23 +222,23 @@ export default function APlusAStudioSite() {
                   }}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl border border-neutral-300 bg-neutral-50 px-5 py-3 text-sm font-medium text-neutral-950 transition hover:bg-neutral-100"
                 >
-                  What we do <Sparkles className="h-4 w-4" />
+                  {t.hero.whatWeDo} <Sparkles className="h-4 w-4" />
                 </a>
                 <div className="hidden items-center gap-2 pl-1 text-xs text-neutral-500 sm:flex">
                   <span className="inline-flex h-2 w-2 rounded-full bg-green-500" />
-                  Available for new partner work
+                  {t.hero.available}
                 </div>
               </motion.div>
 
               <div className="mt-10 grid gap-3 sm:grid-cols-3">
-                <Stat k="30–40€" v="Typical hourly rate" />
-                <Stat k="BIM-ready" v="Revit / IFC workflows" />
-                <Stat k="Partner mode" v="Like an internal team" />
+                <Stat k={t.hero.rate} v={t.hero.rateDesc} />
+                <Stat k={t.hero.bim} v={t.hero.bimDesc} />
+                <Stat k={t.hero.partner} v={t.hero.partnerDesc} />
               </div>
             </div>
 
             <div className="md:col-span-5">
-              <HeroStack active={active} setActive={setActive} />
+              <HeroStack active={active} setActive={setActive} t={t} />
             </div>
           </div>
         </section>
@@ -218,13 +247,13 @@ export default function APlusAStudioSite() {
           <div className="mb-12 grid gap-8 md:grid-cols-5 md:items-end">
             <div className="md:col-span-3">
               <div className="inline-block">
-                <span className="inline-block rounded-full border border-blue-300 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-700 mb-3">Work</span>
+                <span className="inline-block rounded-full border border-blue-300 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-700 mb-3">{t.work.badge}</span>
               </div>
-              <h2 className="text-4xl font-bold leading-tight md:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 via-neutral-800 to-neutral-700">Featured</span> Projects</h2>
+              <h2 className="text-4xl font-bold leading-tight md:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 via-neutral-800 to-neutral-700">{t.work.title}</span> {t.work.titleSpan}</h2>
             </div>
             <div className="md:col-span-2 text-right">
               <button className="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-neutral-100 active:scale-95">
-                View all work <ArrowRight className="h-4 w-4" />
+                {t.work.viewAll} <ArrowRight className="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -239,11 +268,11 @@ export default function APlusAStudioSite() {
         <section id="services" className="mx-auto max-w-6xl px-4 py-14 md:py-24">
           <div className="mb-12">
             <div className="inline-block">
-              <span className="inline-block rounded-full border border-purple-300 bg-purple-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-purple-700 mb-3">Expertise</span>
+              <span className="inline-block rounded-full border border-purple-300 bg-purple-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-purple-700 mb-3">{t.services.badge}</span>
             </div>
-            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">What we <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400">deliver</span></h2>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">{t.services.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400">{t.services.titleSpan}</span></h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600">
-              From permit planning to pixel-perfect visualization — we handle the full spectrum of architectural delivery.
+              {t.services.desc}
             </p>
           </div>
           <div className="grid gap-10 md:grid-cols-12">
@@ -254,18 +283,18 @@ export default function APlusAStudioSite() {
                     <PlayCircle className="h-5 w-5 text-blue-700" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold">Deep collaboration</div>
+                    <div className="text-sm font-bold">{t.services.collaboration}</div>
                     <div className="mt-1 text-sm text-neutral-700">
-                      We're not a vendor — we're an extension of your team. Weekly syncs, shared models, and real-time problem-solving.
+                      {t.services.collaborationDesc}
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                  <Pill>Revit Standards</Pill>
-                  <Pill>IFC Ready</Pill>
-                  <Pill>Detail-First</Pill>
-                  <Pill>Fast Delivery</Pill>
+                  <Pill>{t.services.revitStandards}</Pill>
+                  <Pill>{t.services.ifcReady}</Pill>
+                  <Pill>{t.services.detailFirst}</Pill>
+                  <Pill>{t.services.fastDelivery}</Pill>
                 </div>
               </div>
             </div>
@@ -283,20 +312,20 @@ export default function APlusAStudioSite() {
         <section id="studio" className="mx-auto max-w-6xl px-4 py-14 md:py-24">
           <div className="mb-12">
             <div className="inline-block">
-              <span className="inline-block rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-3">About</span>
+              <span className="inline-block rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-3">{t.studio.badge}</span>
             </div>
-            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">perfectionists</span></h2>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">{t.studio.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">{t.studio.titleSpan}</span></h2>
           </div>
           <div className="grid gap-10 md:grid-cols-12">
             <div className="md:col-span-6">
               <div className="rounded-3xl border border-neutral-200 bg-gradient-to-br from-emerald-50/50 to-white p-8">
-                <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700 mb-4">Our Philosophy</div>
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700 mb-4">{t.studio.philosophy}</div>
                 <div className="mt-0 space-y-4 text-base leading-relaxed text-neutral-800">
                   <p>
-                    <span className="font-bold text-neutral-950">Precision first.</span> Architecture demands exactness.
+                    <span className="font-bold text-neutral-950">{t.studio.precisionFirst}</span> {t.studio.precisionDesc}
                   </p>
                   <p>
-                    <span className="font-bold text-neutral-950">Speed without sacrifice.</span> We work fast, efficiently.
+                    <span className="font-bold text-neutral-950">{t.studio.speedFirst}</span> {t.studio.speedDesc}
                   </p>
                 </div>
               </div>
@@ -307,31 +336,34 @@ export default function APlusAStudioSite() {
             <div className="md:col-span-6">
               <div className="grid gap-4 sm:grid-cols-3">
                 <TeamCard
-                  name="Principal Architect"
-                  role="Design & Planning"
+                  name={t.studio.badge === "About" ? "Principal Architect" : "Chefarchitekt"}
+                  role={(lang === "en" ? "Design & Planning" : "Design & Planung")}
                   img="https://images.unsplash.com/photo-1558222218-b7b54eede3f3?auto=format&fit=crop&w=1200&q=80"
+                  lang={lang}
                 />
                 <TeamCard
-                  name="Senior Architect"
-                  role="Construction Drawing"
+                  name={lang === "en" ? "Senior Architect" : "Seniorarchitekt"}
+                  role={lang === "en" ? "Construction Drawing" : "Konstruktionszeichnung"}
                   img="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+                  lang={lang}
                 />
                 <TeamCard
-                  name="Project Manager"
-                  role="Client Relations"
+                  name={lang === "en" ? "Project Manager" : "Projektmanager"}
+                  role={lang === "en" ? "Client Relations" : "Kundenbetreuung"}
                   img="https://images.unsplash.com/photo-1520975682071-a8d19f4f4b3a?auto=format&fit=crop&w=1200&q=80"
+                  lang={lang}
                 />
               </div>
 
               <div className="mt-4 rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <div className="text-sm font-medium">European-based team • Digital-first workflow</div>
-                    <div className="mt-1 text-sm text-neutral-600">Architecture, planning, technical drawings, visualization, and delivery.</div>
+                    <div className="text-sm font-medium">{t.studio.teamDesc}</div>
+                    <div className="mt-1 text-sm text-neutral-600">{t.studio.teamServices}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex h-2 w-2 rounded-full bg-blue-400" />
-                    <span className="text-xs text-neutral-500">Available for new projects</span>
+                    <span className="text-xs text-neutral-500">{t.studio.available}</span>
                   </div>
                 </div>
               </div>
@@ -343,11 +375,11 @@ export default function APlusAStudioSite() {
           <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-blue-100/60 via-purple-100/30 to-pink-100/40 blur-3xl" />
           <div className="mb-12">
             <div className="inline-block">
-              <span className="inline-block rounded-full border border-indigo-300 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-indigo-700 mb-3">Get Started</span>
+              <span className="inline-block rounded-full border border-indigo-300 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-indigo-700 mb-3">{t.contact.badge}</span>
             </div>
-            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-400">create</span> together</h2>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">{t.contact.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-400">{t.contact.titleSpan}</span> {t.contact.titleEnd}</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600">
-              Tell us about your project. We'll respond with a concrete plan, timeline, and investment.
+              {t.contact.desc}
             </p>
           </div>
           <div className="overflow-hidden rounded-[2rem] border border-neutral-200 bg-gradient-to-br from-neutral-50 via-white to-neutral-50 shadow-lg shadow-blue-500/10">
@@ -355,40 +387,38 @@ export default function APlusAStudioSite() {
               <div className="p-7 md:col-span-5 md:p-10">
                 <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs text-neutral-700">
                   <Sparkles className="h-3.5 w-3.5" />
-                  Let's build something clean
+                  {t.contact.buildClean}
                 </div>
-                <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">Reach out</h2>
+                <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">{t.contact.reachOut}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-                  Send a short message with your scope and timeline. We’ll reply with a suggested setup
-                  (tools, cadence, deliverables) and a clear estimate.
+                  {t.contact.reachOutDesc}
                 </p>
 
                 <div className="mt-6 space-y-3 text-sm">
-                  <ContactRow icon={Mail} label="hello@studio.architect" />
-                  <ContactRow icon={Phone} label="+49 (0) 30 ••• ••••" />
-                  <ContactRow icon={MapPin} label="Central Europe, EU" />
+                  <ContactRow icon={Mail} label={t.contact.email} />
+                  <ContactRow icon={Phone} label={t.contact.phone} />
+                  <ContactRow icon={MapPin} label={t.contact.location} />
                 </div>
 
                 <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs uppercase tracking-[0.18em] text-white/55">Best first message</div>
+                  <div className="text-xs uppercase tracking-[0.18em] text-white/55">{t.contact.bestMessage}</div>
                   <div className="mt-2 text-sm text-white/70">
-                    “We need help with <span className="text-white">LPH/phase</span>, BIM/IFC standards, and delivery dates. Here are the
-                    drawings/models we have.”
+                    {t.contact.bestMessageText}
                   </div>
                 </div>
               </div>
 
               <div className="border-t border-neutral-200 p-7 md:col-span-7 md:border-l md:border-t-0 md:p-10">
-                <ContactForm />
+                <ContactForm t={t} lang={lang} />
               </div>
             </div>
           </div>
 
           <footer className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-neutral-200 pt-8 md:flex-row md:items-center">
-            <div className="text-sm text-neutral-600">© {new Date().getFullYear()} a+a studio. All rights reserved.</div>
+            <div className="text-sm text-neutral-600">{t.contact.copyright.replace("{year}", new Date().getFullYear())}</div>
             <div className="flex items-center gap-2 text-xs text-neutral-500">
               <span className="inline-flex h-2 w-2 rounded-full bg-neutral-400" />
-              Built for speed • Designed to stand out
+              {t.contact.footer}
             </div>
           </footer>
         </section>
@@ -534,7 +564,7 @@ function ContactRow({ icon: Icon, label }) {
   );
 }
 
-function ContactForm() {
+function ContactForm({ t, lang }) {
   const [state, setState] = useState({ name: "", email: "", company: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -549,42 +579,42 @@ function ContactForm() {
     <div>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-sm font-medium">Project inquiry</div>
-          <div className="mt-1 text-sm text-neutral-600">We reply with a clean plan: scope → workflow → price.</div>
+          <div className="text-sm font-medium">{t.contact.projectInquiry}</div>
+          <div className="mt-1 text-sm text-neutral-600">{t.contact.projectInquiryDesc}</div>
         </div>
         <div className="hidden items-center gap-2 rounded-full border border-neutral-200 bg-neutral-100 px-3 py-1.5 text-xs text-neutral-700 sm:flex">
           <Sparkles className="h-3.5 w-3.5" />
-          Fast + precise
+          {t.contact.fastPrecise}
         </div>
       </div>
 
       <form onSubmit={onSubmit} className="mt-6 grid gap-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
-            label="Name"
-            placeholder="Your name"
+            label={t.contact.name}
+            placeholder={t.contact.namePlaceholder}
             value={state.name}
             onChange={(v) => setState((s) => ({ ...s, name: v }))}
             required
           />
           <Field
-            label="Email"
+            label={t.contact.emailLabel}
             type="email"
-            placeholder="you@company.com"
+            placeholder={t.contact.emailPlaceholder}
             value={state.email}
             onChange={(v) => setState((s) => ({ ...s, email: v }))}
             required
           />
         </div>
         <Field
-          label="Company / Studio"
-          placeholder="Company name"
+          label={t.contact.company}
+          placeholder={t.contact.companyPlaceholder}
           value={state.company}
           onChange={(v) => setState((s) => ({ ...s, company: v }))}
         />
         <Field
-          label="Message"
-          placeholder="What are you building? Which phase? Any deadlines?"
+          label={t.contact.message}
+          placeholder={t.contact.messagePlaceholder}
           value={state.message}
           onChange={(v) => setState((s) => ({ ...s, message: v }))}
           textarea
@@ -596,10 +626,10 @@ function ContactForm() {
             type="submit"
             className="inline-flex items-center gap-2 rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
           >
-            Send message <ArrowRight className="h-4 w-4" />
+            {t.contact.send} <ArrowRight className="h-4 w-4" />
           </button>
           <div className="text-xs text-neutral-500">
-            No spam. No newsletters. Just project talk.
+            {t.contact.noSpam}
           </div>
         </div>
 
@@ -611,17 +641,16 @@ function ContactForm() {
               exit={{ opacity: 0, y: 8 }}
               className="rounded-2xl border border-green-300 bg-green-100 px-4 py-3 text-sm text-green-900"
             >
-              Sent (demo). In production, wire this to Formspree / Resend / your API.
+              {t.contact.sent}
             </motion.div>
           )}
         </AnimatePresence>
       </form>
 
       <div className="mt-6 rounded-3xl border border-neutral-200 bg-neutral-100 p-5">
-        <div className="text-xs uppercase tracking-[0.18em] text-neutral-500">Optional add-on</div>
+        <div className="text-xs uppercase tracking-[0.18em] text-neutral-500">{t.contact.optionalAddOn}</div>
         <div className="mt-2 text-sm text-neutral-700">
-          Want it extra different? Add a “case study” page per project with interactive before/after sliders,
-          BIM viewer embeds, and a scrolling detail narrative.
+          {t.contact.addOnDesc}
         </div>
       </div>
     </div>
@@ -656,19 +685,19 @@ function Field({ label, value, onChange, placeholder, type = "text", textarea = 
   );
 }
 
-function HeroStack({ active, setActive }) {
+function HeroStack({ active, setActive, t }) {
   const cards = [
     {
-      title: "Permit & execution planning",
-      desc: "Clean deliverables, predictable coordination, no surprises.",
+      title: t.contact.permit,
+      desc: t.contact.permitDesc,
     },
     {
-      title: "Construction drawings",
-      desc: "Details that contractors can actually build from.",
+      title: t.contact.construction,
+      desc: t.contact.constructionDesc,
     },
     {
-      title: "Visualization that sells",
-      desc: "Images & animation that communicate the idea instantly.",
+      title: t.contact.visualization,
+      desc: t.contact.visualizationDesc,
     },
   ];
 
@@ -678,8 +707,8 @@ function HeroStack({ active, setActive }) {
 
       <div className="relative rounded-[2rem] border border-neutral-200 bg-white p-6  shadow-sm shadow-blue-500/5">
         <div className="flex items-center justify-between">
-          <div className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-700">What we deliver</div>
-          <div className="text-xs text-neutral-400">click to explore</div>
+          <div className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-700">{t.contact.whatDeliver}</div>
+          <div className="text-xs text-neutral-400">{t.contact.clickExplore}</div>
         </div>
 
         <div className="mt-4 space-y-3">
@@ -728,13 +757,13 @@ function HeroStack({ active, setActive }) {
                           className="mt-3 flex flex-wrap gap-2"
                         >
                           <span className="rounded-full border border-neutral-200 bg-neutral-100 px-3 py-1 text-xs text-neutral-700">
-                            Revit / IFC
+                            {t.contact.revitIfc}
                           </span>
                           <span className="rounded-full border border-neutral-200 bg-neutral-100 px-3 py-1 text-xs text-neutral-700">
-                            Detail planning
+                            {t.contact.detailPlanning}
                           </span>
                           <span className="rounded-full border border-neutral-200 bg-neutral-100 px-3 py-1 text-xs text-neutral-700">
-                            Weekly handover
+                            {t.contact.weeklyHandover}
                           </span>
                         </motion.div>
                       )}
@@ -748,11 +777,11 @@ function HeroStack({ active, setActive }) {
 
         <div className="mt-5 rounded-[1.6rem] border border-neutral-200 bg-white p-4 shadow-sm shadow-blue-500/10">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-semibold text-neutral-950">Visual differentiation</div>
-            <div className="text-xs text-neutral-500">what we stand for</div>
+            <div className="text-sm font-semibold text-neutral-950">{t.contact.visualDiff}</div>
+            <div className="text-xs text-neutral-500">{t.contact.whatStandFor}</div>
           </div>
           <div className="mt-2 text-sm text-neutral-700">
-            Modern, intentional design that moves without distraction. No stock components — every interaction serves a purpose.
+            {t.contact.visualDiffText}
           </div>
           <div className="mt-3 h-2 w-full rounded-full bg-neutral-300">
             <div
