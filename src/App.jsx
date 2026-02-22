@@ -280,33 +280,29 @@ export default function APlusAStudioSite() {
           </div>
         </section>
 
+        <section id="studio" className="mx-auto max-w-6xl px-4 py-14 md:py-24">
           <div className="mb-12">
             <div className="inline-block">
               <span className="inline-block rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-3">About</span>
             </div>
             <h2 className="text-4xl font-bold leading-tight md:text-5xl mt-3">Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">perfectionists</span></h2>
           </div>
+          <div className="grid gap-10 md:grid-cols-12">
             <div className="md:col-span-6">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Studio</h2>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">
-                We’re small on purpose. Senior hands on the work. No layers. No noise.
-                Just reliable output you can trust.
-              </p>
-
-              <div className="mt-7 rounded-3xl border border-neutral-200 bg-gradient-to-br from-neutral-50 to-white p-6">
-                <div className="text-xs uppercase tracking-[0.18em] text-neutral-500">Manifesto</div>
-                <div className="mt-3 space-y-3 text-sm leading-relaxed text-neutral-700">
+              <div className="rounded-3xl border border-neutral-200 bg-gradient-to-br from-emerald-50/50 to-white p-8">
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700 mb-4">Our Philosophy</div>
+                <div className="mt-0 space-y-4 text-base leading-relaxed text-neutral-800">
                   <p>
-                    <span className="text-neutral-950">Design is a contract</span> between intention and reality.
-                    Our job is to make sure nothing gets lost between the sketch, the model, and the site.
+                    <span className="font-bold text-neutral-950">Precision first.</span> Architecture demands exactness.
                   </p>
                   <p>
-                    We love partners who move fast and care about precision. If that’s you, we’ll feel like
-                    your internal production team — just with a different timezone.
+                    <span className="font-bold text-neutral-950">Speed without sacrifice.</span> We work fast, efficiently.
                   </p>
                 </div>
               </div>
             </div>
+
+
 
             <div className="md:col-span-6">
               <div className="grid gap-4 sm:grid-cols-3">
